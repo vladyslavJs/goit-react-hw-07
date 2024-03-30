@@ -32,3 +32,9 @@
   letter-spacing: 0.02em;
   margin-top: 24px;
 }
+
+.container {
+    width: 320px;
+    margin: 0 auto;
+    padding: 16px 32px;
+  }
