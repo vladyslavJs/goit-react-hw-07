@@ -1,15 +1,15 @@
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './SearchBox.module.css';
 import { useId } from 'react';
-// import { changeFilter, selectNameFilter } from '../../redux/filtersSlice';
+import { changeFilter, selectNameFilter } from '../../redux/filtersSlice';
 import { CiSearch } from "react-icons/ci";
 
 
 export default function SearchBox() {
 
     const elementId = useId();
-    // const dispatch = useDispatch();
-    // const value = useSelector(selectNameFilter);
+    const dispatch = useDispatch();
+    const value = useSelector(selectNameFilter);
 
 
     return (
@@ -22,8 +22,8 @@ export default function SearchBox() {
                 type="text"
                 placeholder="John Wick"
                 id={elementId}
-                // value={value}
-                // onChange={e => dispatch(changeFilter(e.target.value))}
+                value={value}
+                onChange={e => dispatch(changeFilter(e.target.value))}
             />
         </div>
     );
