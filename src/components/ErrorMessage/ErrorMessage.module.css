@@ -1,0 +1,11 @@
+.error {
+    text-align: center;
+    color: #808080; 
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    font-size: 22px;
+}
+
+.icon {
+    color: #FF0000;
+}
