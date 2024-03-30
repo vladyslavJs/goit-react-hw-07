@@ -4,11 +4,11 @@ import css from './ContactForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-// import { useDispatch } from 'react-redux';
-// import { addContact } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsOps';
 
 import { IoIosContact } from "react-icons/io";
-
+import toast from 'react-hot-toast';
 
 const ContactSchema = Yup.object().shape({
     name: Yup.string().min(3, 'To short...').max(50,'To long!').required('Required field!'),
@@ -20,18 +20,29 @@ export default function ContactForm() {
     const nameId = useId();
     const numberId = useId();
 
-    //  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    
+    const handleSubmit = newContact => {
+        dispatch(addContact(newContact))
+            .unwrap()
+            .then(() => {
+                toast.success('Contact added')
+            })
+            .catch(() => {
+                toast.error('Something is wrong, please try again')
+            });   
+    };
     
     return (
         <Formik
             initialValues={{ id: '', name: '', number: '' }}
             onSubmit={(values, actions) => {
-                // const newContact = {
-                //     id: '',
-                //     name: values.name,
-                //     number: values.number,
-                // };
-                // dispatch(addContact(newContact));
+                const newContact = {
+                    id: '',
+                    name: values.name,
+                    number: values.number,
+                };
+                handleSubmit(newContact);
                 actions.resetForm();
             }}
             validationSchema={ContactSchema}
